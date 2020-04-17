@@ -1,30 +1,32 @@
 package org.code4everything.validator;
 
-import org.code4everything.validator.validation.SortValidator;
+import cn.hutool.core.lang.Validator;
+import org.code4everything.validator.validation.GeneralStringValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
-import java.util.Comparator;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * working for and list, non validation
+ * working for string {@link Validator#isGeneral(CharSequence)} or {@link Validator#isGeneralWithChinese(CharSequence)}
  *
  * @author pantao
- * @since 2020/4/16
+ * @since 2020/4/17
  */
 @Target({METHOD, FIELD, PARAMETER})
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = {SortValidator.class})
-public @interface Sort {
+@Constraint(validatedBy = {GeneralStringValidator.class})
+public @interface GeneralString {
 
-    Class<? extends Comparator<?>> comparator();
+    boolean withChinese() default false;
+
+    String message() default "general string checking error";
 
     Class<?>[] groups() default {};
 

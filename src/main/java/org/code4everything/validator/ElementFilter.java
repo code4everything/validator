@@ -12,7 +12,7 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * working for list, and map
+ * working for list, and map, non validation
  *
  * @author pantao
  * @since 2020/4/16

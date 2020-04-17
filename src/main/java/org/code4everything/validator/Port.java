@@ -1,30 +1,32 @@
 package org.code4everything.validator;
 
-import org.code4everything.validator.validation.SortValidator;
+import cn.hutool.core.net.NetUtil;
+import org.code4everything.validator.validation.PortValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
-import java.util.Comparator;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * working for and list, non validation
+ * working for number {@link NetUtil#isValidPort(int)} or {@link NetUtil#isUsableLocalPort(int)}
  *
  * @author pantao
- * @since 2020/4/16
+ * @since 2020/4/17
  */
 @Target({METHOD, FIELD, PARAMETER})
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = {SortValidator.class})
-public @interface Sort {
+@Constraint(validatedBy = {PortValidator.class})
+public @interface Port {
 
-    Class<? extends Comparator<?>> comparator();
+    boolean localUsable() default false;
+
+    String message() default "must be a valid port";
 
     Class<?>[] groups() default {};
 
