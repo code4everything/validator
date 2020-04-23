@@ -5,6 +5,7 @@ import org.code4everything.validator.FormattedDate;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.Objects;
 
 /**
  * @author pantao
@@ -20,8 +21,11 @@ public class FormattedDateValidator implements ConstraintValidator<FormattedDate
     }
 
     @Override
-    public boolean isValid(CharSequence charSequence, ConstraintValidatorContext constraintValidatorContext) {
-        constraintValidatorContext.buildConstraintViolationWithTemplate(formattedDate.message());
+    public boolean isValid(CharSequence charSequence, ConstraintValidatorContext context) {
+        context.buildConstraintViolationWithTemplate(formattedDate.message());
+        if (Objects.isNull(charSequence)) {
+            return formattedDate.nullable();
+        }
         try {
             DateUtil.parse(charSequence, formattedDate.value());
             return true;

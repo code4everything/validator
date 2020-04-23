@@ -29,6 +29,8 @@ public @interface FormattedDate {
      */
     String value() default DatePattern.NORM_DATE_PATTERN;
 
+    boolean nullable() default false;
+
     String message() default "date format error";
 
     Class<?>[] groups() default {};
