@@ -1,6 +1,6 @@
 package org.code4everything.validator;
 
-import org.code4everything.validator.validation.ContainsValidator;
+import org.code4everything.validator.validation.ContainValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -20,8 +20,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({METHOD, FIELD, PARAMETER})
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = {ContainsValidator.class})
-public @interface Contains {
+@Constraint(validatedBy = {ContainValidator.class})
+public @interface Contain {
 
     String value();
 
