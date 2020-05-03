@@ -13,7 +13,7 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * working for and list, non validation
+ * working for list, non validation
  *
  * @author pantao
  * @since 2020/4/16

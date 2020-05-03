@@ -24,8 +24,8 @@ public class InValidator implements ConstraintValidator<In, Object> {
 
     @Override
     public boolean isValid(Object o, ConstraintValidatorContext constraintValidatorContext) {
-        if (!Objects.isNull(o)) {
-            ValidatorUtils.handleNull(constraintValidatorContext, in.nullable(), in.message(), ARRAY, "");
+        if (Objects.isNull(o)) {
+            return ValidatorUtils.handleNull(constraintValidatorContext, in.nullable(), in.message(), ARRAY, "");
         }
         String value = "";
         if (ArrayUtil.isNotEmpty(in.strings())) {

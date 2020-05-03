@@ -25,7 +25,7 @@ public class NotInValidator implements ConstraintValidator<NotIn, Object> {
     @Override
     public boolean isValid(Object o, ConstraintValidatorContext constraintValidatorContext) {
         if (Objects.isNull(o)) {
-            ValidatorUtils.handleNull(constraintValidatorContext, notIn.nullable(), notIn.message(), ARRAY, "");
+            return ValidatorUtils.handleNull(constraintValidatorContext, notIn.nullable(), notIn.message(), ARRAY, "");
         }
         if (ArrayUtil.isNotEmpty(notIn.strings())) {
             if (o instanceof CharSequence) {
