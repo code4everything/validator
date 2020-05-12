@@ -7,18 +7,22 @@
     <groupId>org.code4everything</groupId>
     <artifactId>validator</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+
+    <!--私有仓库-->
+    <repositories>
+        <repository>
+            <id>ease-maven</id>
+            <url>https://code4everything.gitee.io/repository/maven</url>
+        </repository>
+    </repositories>
+
+    <!--本地仓库-->
+    <distributionManagement>
+        <repository>
+            <id>ease-maven</id>
+            <url>file:${user.home}/.m2/repository</url>
+        </repository>
+    </distributionManagement>
 
     <dependencies>
         <dependency>
@@ -37,4 +41,17 @@
             <version>4.13</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
