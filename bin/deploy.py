@@ -44,8 +44,8 @@ target_path = os.sep.join(
 shutil.copytree(validator_mvn_home, target_path)
 
 print(os.popen('git add .').read())
-print(os.popen('git commit -m "release v%s"' % version).read())
+print(os.popen('git commit -m "shell release v%s"' % version).read())
 
 os.chdir(project_repository_path)
 print(os.popen('git add .').read())
-print(os.popen('git commit -m "release %s v%s"' % ('validator', version)).read())
+print(os.popen('git commit -m "shell release %s v%s by shell"' % ('validator', version)).read())
