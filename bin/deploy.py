@@ -48,4 +48,4 @@ print(os.popen('git commit -m "shell release v%s"' % version).read())
 
 os.chdir(project_repository_path)
 print(os.popen('git add .').read())
-print(os.popen('git commit -m "shell release %s v%s by shell"' % ('validator', version)).read())
+print(os.popen('git commit -m "shell release %s v%s"' % ('validator', version)).read())
