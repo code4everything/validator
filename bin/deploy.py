@@ -29,7 +29,7 @@ with open('pom.xml', 'r+', encoding='utf-8') as fr:
 
 with open('pom.xml', 'w+', encoding='utf-8') as fw:
     replaced = re.sub('<project.version>.*?</project.version>',
-                      version.join(['<project.version>', '</project.version>']), content)
+                      version.join(['<project.version>', '</project.version>']), content, 1)
     fw.write(replaced)
 
 # 安装至本地maven仓库
@@ -48,4 +48,5 @@ print(os.popen('git commit -m "shell release v%s"' % version).read())
 
 os.chdir(project_repository_path)
 print(os.popen('git add .').read())
-print(os.popen('git commit -m "shell release %s v%s"' % ('validator', version)).read())
+print(os.popen('git commit -m "shell release %s v%s"' %
+               ('validator', version)).read())
