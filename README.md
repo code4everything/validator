@@ -1,37 +1,60 @@
-# validator
+## SpringMvc 参数校验注解扩展包
 
-#### 介绍
-java validator
+定义了一些`SpringMVC`通用的参数校验注解，轻松实现入参的校验，提高接口的健壮性，避免生成一些不必要的脏数据
 
-#### 软件架构
-软件架构说明
+### 使用
 
+``` xml
+<repository>
+    <id>ease-maven</id>
+    <url>https://code4everything.gitee.io/repository/maven</url>
+</repository>
+```
 
-#### 安装教程
+``` xml
+<dependency>
+    <groupId>org.code4everything</groupId>
+    <artifactId>validator</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+### 校验Body
 
-#### 使用说明
+``` java
+@Data
+public class BodyVO {
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+    @Chinese(has = true)
+    private String chinese;
 
-#### 参与贡献
+    @EndWith("suffix")
+    private String suffix;
+}
+```
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+``` java
+@RestController
+public class TestController {
 
+    @GetMapping("/validation/body")
+    public String validateBody(@Valid @RequestBody BodyVO bodyVO) {
+        return "success";
+    }
+}
+```
 
-#### 码云特技
+### 校验参数
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5.  码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+``` java
+@Validated
+@RestController
+public class TestController {
+
+    @GetMapping("/validation/body")
+    public String validateQueryString(@Letter(lowerCase = true) String letter, @Mobile String phoneNumber) {
+        return "success";
+    }
+}
+```
+
