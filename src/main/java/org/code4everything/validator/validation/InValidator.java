@@ -98,7 +98,8 @@ public class InValidator implements ConstraintValidator<In, Object> {
                 }
             }
             return failed(constraintValidatorContext, ArrayUtil.toString(in.chars()));
-        } else if (ArrayUtil.isNotEmpty(in.booleans()) && o instanceof Boolean) {
+        }
+        if (ArrayUtil.isNotEmpty(in.booleans()) && o instanceof Boolean) {
             Boolean test = (Boolean) o;
             for (Boolean b : in.booleans()) {
                 if (Objects.equals(b, test)) {
