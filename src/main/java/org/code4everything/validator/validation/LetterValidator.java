@@ -38,19 +38,22 @@ public class LetterValidator implements ConstraintValidator<Letter, CharSequence
                     return false;
                 }
             }
-        } else if (letter.lowerCase()) {
+            return true;
+        }
+        if (letter.lowerCase()) {
             for (char c : charSequence.toString().toCharArray()) {
                 if (!CharUtil.isLetterLower(c)) {
                     ValidatorUtils.buildTemplate(constraintValidatorContext, letter.message(), CASE, " lower ");
                     return false;
                 }
             }
-        } else {
-            for (char c : charSequence.toString().toCharArray()) {
-                if (!CharUtil.isLetter(c)) {
-                    ValidatorUtils.buildTemplate(constraintValidatorContext, letter.message(), CASE, " ");
-                    return false;
-                }
+            return true;
+        }
+
+        for (char c : charSequence.toString().toCharArray()) {
+            if (!CharUtil.isLetter(c)) {
+                ValidatorUtils.buildTemplate(constraintValidatorContext, letter.message(), CASE, " ");
+                return false;
             }
         }
         return true;
