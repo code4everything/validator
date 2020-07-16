@@ -27,98 +27,91 @@ public class InValidator implements ConstraintValidator<In, Object> {
         if (Objects.isNull(o)) {
             return ValidatorUtils.handleNull(constraintValidatorContext, in.nullable(), in.message(), ARRAY, "");
         }
-        String value = "";
-        if (ArrayUtil.isNotEmpty(in.strings())) {
-            if (o instanceof CharSequence) {
-                String test = ((CharSequence) o).toString();
-                for (String string : in.strings()) {
-                    if (Objects.equals(string, test)) {
-                        return true;
-                    }
+        if (ArrayUtil.isNotEmpty(in.strings()) && o instanceof CharSequence) {
+            String test = ((CharSequence) o).toString();
+            for (String string : in.strings()) {
+                if (Objects.equals(string, test)) {
+                    return true;
                 }
-                value = ArrayUtil.toString(in.strings());
             }
-        } else if (ArrayUtil.isNotEmpty(in.doubles())) {
-            if (o instanceof Double) {
-                Double test = (Double) o;
-                for (Double d : in.doubles()) {
-                    if (Objects.equals(d, test)) {
-                        return true;
-                    }
-                }
-                value = ArrayUtil.toString(in.doubles());
-            }
-        } else if (ArrayUtil.isNotEmpty(in.floats())) {
-            if (o instanceof Float) {
-                Float test = (Float) o;
-                for (Float f : in.floats()) {
-                    if (Objects.equals(f, test)) {
-                        return true;
-                    }
-                }
-                value = ArrayUtil.toString(in.floats());
-            }
-        } else if (ArrayUtil.isNotEmpty(in.longs())) {
-            if (o instanceof Long) {
-                Long test = (Long) o;
-                for (Long l : in.longs()) {
-                    if (Objects.equals(l, test)) {
-                        return true;
-                    }
-                }
-                value = ArrayUtil.toString(in.longs());
-            }
-        } else if (ArrayUtil.isNotEmpty(in.ints())) {
-            if (o instanceof Integer) {
-                Integer test = (Integer) o;
-                for (Integer i : in.ints()) {
-                    if (Objects.equals(i, test)) {
-                        return true;
-                    }
-                }
-                value = ArrayUtil.toString(in.ints());
-            }
-        } else if (ArrayUtil.isNotEmpty(in.shorts())) {
-            if (o instanceof Short) {
-                Short test = (Short) o;
-                for (Short s : in.shorts()) {
-                    if (Objects.equals(s, test)) {
-                        return true;
-                    }
-                }
-                value = ArrayUtil.toString(in.shorts());
-            }
-        } else if (ArrayUtil.isNotEmpty(in.bytes())) {
-            if (o instanceof Byte) {
-                Byte test = (Byte) o;
-                for (Byte f : in.bytes()) {
-                    if (Objects.equals(f, test)) {
-                        return true;
-                    }
-                }
-                value = ArrayUtil.toString(in.bytes());
-            }
-        } else if (ArrayUtil.isNotEmpty(in.chars())) {
-            if (o instanceof Character) {
-                Character test = (Character) o;
-                for (Character f : in.chars()) {
-                    if (Objects.equals(f, test)) {
-                        return true;
-                    }
-                }
-                value = ArrayUtil.toString(in.chars());
-            }
-        } else if (ArrayUtil.isNotEmpty(in.booleans())) {
-            if (o instanceof Boolean) {
-                Boolean test = (Boolean) o;
-                for (Boolean b : in.booleans()) {
-                    if (Objects.equals(b, test)) {
-                        return true;
-                    }
-                }
-                value = ArrayUtil.toString(in.booleans());
-            }
+            return failed(constraintValidatorContext, ArrayUtil.toString(in.strings()));
         }
+        if (ArrayUtil.isNotEmpty(in.doubles()) && o instanceof Double) {
+            Double test = (Double) o;
+            for (Double d : in.doubles()) {
+                if (Objects.equals(d, test)) {
+                    return true;
+                }
+            }
+            return failed(constraintValidatorContext, ArrayUtil.toString(in.doubles()));
+        }
+        if (ArrayUtil.isNotEmpty(in.floats()) && o instanceof Float) {
+            Float test = (Float) o;
+            for (Float f : in.floats()) {
+                if (Objects.equals(f, test)) {
+                    return true;
+                }
+            }
+            return failed(constraintValidatorContext, ArrayUtil.toString(in.floats()));
+        }
+        if (ArrayUtil.isNotEmpty(in.longs()) && o instanceof Long) {
+            Long test = (Long) o;
+            for (Long l : in.longs()) {
+                if (Objects.equals(l, test)) {
+                    return true;
+                }
+            }
+            return failed(constraintValidatorContext, ArrayUtil.toString(in.longs()));
+        }
+        if (ArrayUtil.isNotEmpty(in.ints()) && o instanceof Integer) {
+            Integer test = (Integer) o;
+            for (Integer i : in.ints()) {
+                if (Objects.equals(i, test)) {
+                    return true;
+                }
+            }
+            return failed(constraintValidatorContext, ArrayUtil.toString(in.ints()));
+        }
+        if (ArrayUtil.isNotEmpty(in.shorts()) && o instanceof Short) {
+            Short test = (Short) o;
+            for (Short s : in.shorts()) {
+                if (Objects.equals(s, test)) {
+                    return true;
+                }
+            }
+            return failed(constraintValidatorContext, ArrayUtil.toString(in.shorts()));
+        }
+        if (ArrayUtil.isNotEmpty(in.bytes()) && o instanceof Byte) {
+            Byte test = (Byte) o;
+            for (Byte f : in.bytes()) {
+                if (Objects.equals(f, test)) {
+                    return true;
+                }
+            }
+            return failed(constraintValidatorContext, ArrayUtil.toString(in.bytes()));
+        }
+        if (ArrayUtil.isNotEmpty(in.chars()) && o instanceof Character) {
+            Character test = (Character) o;
+            for (Character f : in.chars()) {
+                if (Objects.equals(f, test)) {
+                    return true;
+                }
+            }
+            return failed(constraintValidatorContext, ArrayUtil.toString(in.chars()));
+        } else if (ArrayUtil.isNotEmpty(in.booleans()) && o instanceof Boolean) {
+            Boolean test = (Boolean) o;
+            for (Boolean b : in.booleans()) {
+                if (Objects.equals(b, test)) {
+                    return true;
+                }
+            }
+            return failed(constraintValidatorContext, ArrayUtil.toString(in.booleans()));
+        }
+
+        return false;
+    }
+
+    private boolean failed(ConstraintValidatorContext constraintValidatorContext, String value) {
         ValidatorUtils.buildTemplate(constraintValidatorContext, in.message(), ARRAY, value);
         return false;
     }

@@ -28,7 +28,7 @@ public class DateCheckerValidator implements ConstraintValidator<DateChecker, Ob
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
-        DateTime dateTime = null;
+        dateTime = null;
         if (value instanceof Date) {
             dateTime = DateUtil.date((Date) value);
         } else if (value instanceof Calendar) {
@@ -42,8 +42,6 @@ public class DateCheckerValidator implements ConstraintValidator<DateChecker, Ob
         if (Objects.isNull(dateTime)) {
             return true;
         }
-
-        this.dateTime = dateTime;
 
         if (!isBetween(dateChecker.min(), dateChecker.max())) {
             return false;
